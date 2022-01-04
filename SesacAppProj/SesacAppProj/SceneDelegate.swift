@@ -18,8 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+        // 여기서 조건
+        // 로그인 UserDefaluts ? 값이 존재하면 MainViewController + 자동로그인 되었습니다 알림 : 존재하지 않으면 StartViewController()
+        window?.rootViewController = UINavigationController(rootViewController: StartViewController())
         window?.makeKeyAndVisible()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
