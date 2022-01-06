@@ -17,12 +17,17 @@ class SignInViewController : BaseViewController {
     let passwordTextField = UITextField()
     let loginButton = UIButton()
     
+    var viewModel = SigninViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "새싹농장 로그인하기"
         
         setConfigures()
         setUI()
         setConstraints()
+        bind()
         
     }
     
@@ -50,18 +55,22 @@ class SignInViewController : BaseViewController {
         emailTextField.placeholder = "이메일"
         emailTextField.borderStyle = .roundedRect
         emailTextField.textColor = .black
+        emailTextField.addTarget(self, action: #selector(emailTextFieldDidChange(_:)), for: .editingChanged)
         
         //Password TextField Set
         passwordTextField.placeholder = "비밀번호"
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.textColor = .black
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.addTarget(self, action: #selector(passwordTextFieldDidChange(_:)), for: .editingChanged)
         
         //Login Button Set
         loginButton.setTitle("로그인", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.backgroundColor = .black
         loginButton.layer.cornerRadius = 10
-
+        loginButton.addTarget(self, action: #selector(loginBtnClicked), for: .touchUpInside)
+        
     }
     
     override func setUI() {
@@ -121,4 +130,40 @@ class SignInViewController : BaseViewController {
         
     }
     
+    override func bind() {
+        
+        viewModel.email.bind { text in
+            self.emailTextField.text = text
+        }
+        
+        viewModel.password.bind { text in
+            self.passwordTextField.text = text
+        }
+        
+    }
+    
+    @objc func emailTextFieldDidChange(_ textField : UITextField){
+        viewModel.email.value = textField.text ?? ""
+    }
+    
+    @objc func passwordTextFieldDidChange(_ textField : UITextField){
+        viewModel.password.value = textField.text ?? ""
+    }
+    
+    @objc func loginBtnClicked(){
+        
+        self.showToast(message: viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 250, height: 40)
+        
+        viewModel.signinToMain {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1 , execute: {
+                //로그인 성공후 화면전환
+                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {return}
+                
+                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+                
+                windowScene.windows.first?.makeKeyAndVisible()
+            })
+        }
+        
+    }
 }

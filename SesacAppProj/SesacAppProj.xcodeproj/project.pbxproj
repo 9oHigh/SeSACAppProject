@@ -14,21 +14,27 @@
 		4C86E09B27834E0C00963717 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4C86E09A27834E0C00963717 /* SnapKit */; };
 		4C86E0A7278437F100963717 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0A6278437F100963717 /* StartViewController.swift */; };
 		4C86E0AB27843F8500963717 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0AA27843F8500963717 /* APIService.swift */; };
-		4C86E0AD2784404A00963717 /* URLSession + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0AC2784404A00963717 /* URLSession + Extension.swift */; };
 		4C86E0B02784415E00963717 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0AF2784415E00963717 /* BaseViewController.swift */; };
 		4C86E0B32784593B00963717 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4C86E0B22784593B00963717 /* RxCocoa */; };
 		4C86E0B52784593B00963717 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4C86E0B42784593B00963717 /* RxSwift */; };
 		4C86E0B727845A7C00963717 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0B627845A7C00963717 /* SignInViewController.swift */; };
 		4C86E0B927845A8900963717 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0B827845A8900963717 /* SignUpViewController.swift */; };
-		4C86E0BB278461FF00963717 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0BA278461FF00963717 /* SignUpViewModel.swift */; };
-		4C86E0BD27846D0500963717 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0BC27846D0500963717 /* SignInViewModel.swift */; };
-		4C86E0BF2784747B00963717 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0BE2784747B00963717 /* SignUpModel.swift */; };
 		4C86E0C12784762C00963717 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0C02784762C00963717 /* UIViewController + Extension.swift */; };
-		4C86E0C8278489C000963717 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0C7278489C000963717 /* UserModel.swift */; };
+		4C86E0C8278489C000963717 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0C7278489C000963717 /* Model.swift */; };
+		4C86E0CB2784AFC800963717 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0CA2784AFC800963717 /* EndPoint.swift */; };
+		4C86E0DC2785B96800963717 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0DB2785B96800963717 /* SignupViewModel.swift */; };
+		4C86E0DE2785B98E00963717 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0DD2785B98E00963717 /* Observable.swift */; };
+		4C86E0E52785FA6700963717 /* SigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0E42785FA6700963717 /* SigninViewModel.swift */; };
+		4C86E0E72786080800963717 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0E62786080800963717 /* MainTableViewCell.swift */; };
+		4C86E0E92786107600963717 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0E82786107600963717 /* MainViewModel.swift */; };
+		4C86E0EF2786E3C600963717 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0EE2786E3C600963717 /* WriteViewController.swift */; };
+		4C86E0F12786E41B00963717 /* DetailPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0F02786E41B00963717 /* DetailPostViewController.swift */; };
+		4C86E0F52786E4B800963717 /* DetailPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0F42786E4B800963717 /* DetailPostTableViewCell.swift */; };
+		4C86E0F72786E96A00963717 /* PostTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0F62786E96A00963717 /* PostTopView.swift */; };
+		4C86E0F92786F8EB00963717 /* DetailPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0F82786F8EB00963717 /* DetailPostViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C86E08227834DEE00963717 /* SesacAppProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SesacAppProj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C86E08527834DEE00963717 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C86E08727834DEE00963717 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4C86E08927834DEE00963717 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -36,15 +42,23 @@
 		4C86E09327834DF100963717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C86E0A6278437F100963717 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		4C86E0AA27843F8500963717 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		4C86E0AC2784404A00963717 /* URLSession + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession + Extension.swift"; sourceTree = "<group>"; };
 		4C86E0AF2784415E00963717 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		4C86E0B627845A7C00963717 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4C86E0B827845A8900963717 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		4C86E0BA278461FF00963717 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		4C86E0BC27846D0500963717 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
-		4C86E0BE2784747B00963717 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		4C86E0C02784762C00963717 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
-		4C86E0C7278489C000963717 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		4C86E0C7278489C000963717 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		4C86E0CA2784AFC800963717 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		4C86E0DB2785B96800963717 /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		4C86E0DD2785B98E00963717 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		4C86E0E32785F17300963717 /* SesacAppProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SesacAppProj.app; path = "/Users/leegyeonghu/SesacAppProj/SesacAppProj/build/Debug-iphoneos/SesacAppProj.app"; sourceTree = "<absolute>"; };
+		4C86E0E42785FA6700963717 /* SigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewModel.swift; sourceTree = "<group>"; };
+		4C86E0E62786080800963717 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		4C86E0E82786107600963717 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		4C86E0EE2786E3C600963717 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
+		4C86E0F02786E41B00963717 /* DetailPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
+		4C86E0F42786E4B800963717 /* DetailPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostTableViewCell.swift; sourceTree = "<group>"; };
+		4C86E0F62786E96A00963717 /* PostTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTopView.swift; sourceTree = "<group>"; };
+		4C86E0F82786F8EB00963717 /* DetailPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,26 +79,17 @@
 			isa = PBXGroup;
 			children = (
 				4C86E08427834DEE00963717 /* SesacAppProj */,
-				4C86E08327834DEE00963717 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		4C86E08327834DEE00963717 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4C86E08227834DEE00963717 /* SesacAppProj.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		4C86E08427834DEE00963717 /* SesacAppProj */ = {
 			isa = PBXGroup;
 			children = (
-				4C86E09327834DF100963717 /* Info.plist */,
 				4C86E08E27834DF100963717 /* Assets.xcassets */,
-				4C86E0AA27843F8500963717 /* APIService.swift */,
+				4C86E09327834DF100963717 /* Info.plist */,
 				4C86E08527834DEE00963717 /* AppDelegate.swift */,
 				4C86E08727834DEE00963717 /* SceneDelegate.swift */,
+				4C86E0C92784AFBB00963717 /* API */,
 				4C86E0AE2784405500963717 /* Extension */,
 				4C86E09E27834E7900963717 /* Model */,
 				4C86E09C27834E6A00963717 /* View */,
@@ -100,7 +105,12 @@
 				4C86E0A6278437F100963717 /* StartViewController.swift */,
 				4C86E0B827845A8900963717 /* SignUpViewController.swift */,
 				4C86E0B627845A7C00963717 /* SignInViewController.swift */,
+				4C86E0E62786080800963717 /* MainTableViewCell.swift */,
 				4C86E08927834DEE00963717 /* MainViewController.swift */,
+				4C86E0EE2786E3C600963717 /* WriteViewController.swift */,
+				4C86E0F62786E96A00963717 /* PostTopView.swift */,
+				4C86E0F42786E4B800963717 /* DetailPostTableViewCell.swift */,
+				4C86E0F02786E41B00963717 /* DetailPostViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -108,8 +118,10 @@
 		4C86E09D27834E7000963717 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4C86E0BA278461FF00963717 /* SignUpViewModel.swift */,
-				4C86E0BC27846D0500963717 /* SignInViewModel.swift */,
+				4C86E0DB2785B96800963717 /* SignupViewModel.swift */,
+				4C86E0E42785FA6700963717 /* SigninViewModel.swift */,
+				4C86E0E82786107600963717 /* MainViewModel.swift */,
+				4C86E0F82786F8EB00963717 /* DetailPostViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -117,8 +129,8 @@
 		4C86E09E27834E7900963717 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4C86E0BE2784747B00963717 /* SignUpModel.swift */,
-				4C86E0C7278489C000963717 /* UserModel.swift */,
+				4C86E0DD2785B98E00963717 /* Observable.swift */,
+				4C86E0C7278489C000963717 /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -126,10 +138,18 @@
 		4C86E0AE2784405500963717 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4C86E0AC2784404A00963717 /* URLSession + Extension.swift */,
 				4C86E0C02784762C00963717 /* UIViewController + Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		4C86E0C92784AFBB00963717 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				4C86E0AA27843F8500963717 /* APIService.swift */,
+				4C86E0CA2784AFC800963717 /* EndPoint.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,7 +174,7 @@
 				4C86E0B42784593B00963717 /* RxSwift */,
 			);
 			productName = SesacAppProj;
-			productReference = 4C86E08227834DEE00963717 /* SesacAppProj.app */;
+			productReference = 4C86E0E32785F17300963717 /* SesacAppProj.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -185,7 +205,7 @@
 				4C86E09927834E0C00963717 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				4C86E0B12784593B00963717 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
-			productRefGroup = 4C86E08327834DEE00963717 /* Products */;
+			productRefGroup = 4C86E07927834DEE00963717;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -210,20 +230,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C86E0BF2784747B00963717 /* SignUpModel.swift in Sources */,
 				4C86E0A7278437F100963717 /* StartViewController.swift in Sources */,
+				4C86E0EF2786E3C600963717 /* WriteViewController.swift in Sources */,
 				4C86E08A27834DEE00963717 /* MainViewController.swift in Sources */,
 				4C86E08627834DEE00963717 /* AppDelegate.swift in Sources */,
 				4C86E0B927845A8900963717 /* SignUpViewController.swift in Sources */,
-				4C86E0BD27846D0500963717 /* SignInViewModel.swift in Sources */,
+				4C86E0F12786E41B00963717 /* DetailPostViewController.swift in Sources */,
+				4C86E0E72786080800963717 /* MainTableViewCell.swift in Sources */,
 				4C86E0AB27843F8500963717 /* APIService.swift in Sources */,
 				4C86E0B727845A7C00963717 /* SignInViewController.swift in Sources */,
 				4C86E0B02784415E00963717 /* BaseViewController.swift in Sources */,
+				4C86E0DC2785B96800963717 /* SignupViewModel.swift in Sources */,
 				4C86E0C12784762C00963717 /* UIViewController + Extension.swift in Sources */,
-				4C86E0BB278461FF00963717 /* SignUpViewModel.swift in Sources */,
+				4C86E0F72786E96A00963717 /* PostTopView.swift in Sources */,
 				4C86E08827834DEE00963717 /* SceneDelegate.swift in Sources */,
-				4C86E0C8278489C000963717 /* UserModel.swift in Sources */,
-				4C86E0AD2784404A00963717 /* URLSession + Extension.swift in Sources */,
+				4C86E0E52785FA6700963717 /* SigninViewModel.swift in Sources */,
+				4C86E0F52786E4B800963717 /* DetailPostTableViewCell.swift in Sources */,
+				4C86E0DE2785B98E00963717 /* Observable.swift in Sources */,
+				4C86E0C8278489C000963717 /* Model.swift in Sources */,
+				4C86E0CB2784AFC800963717 /* EndPoint.swift in Sources */,
+				4C86E0F92786F8EB00963717 /* DetailPostViewModel.swift in Sources */,
+				4C86E0E92786107600963717 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +378,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 46QF7GBZH7;
@@ -378,6 +406,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 46QF7GBZH7;

@@ -27,4 +27,7 @@ class BaseViewController : UIViewController {
         
     }
     
+    func bind(){
+        
+    }
 }

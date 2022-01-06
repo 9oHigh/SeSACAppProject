@@ -138,7 +138,13 @@ class StartViewController : BaseViewController {
     // 로그인 화면
     @objc func loginButtonClicked(){
         
-        self.navigationController?.pushViewController(SignInViewController(), animated: true)
+        let viewController = SignInViewController()
+        let backBarButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButton
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
         
     }
 }

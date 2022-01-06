@@ -9,22 +9,24 @@ import UIKit
 
 class SignUpViewController : BaseViewController {
     
-    let recruitLabel = UILabel() //모집중 라벨!
+    var viewModel = SignupViewModel()
     
+    let recruitLabel = UILabel() //모집중 라벨!
     let emailField = UITextField()
     let nicknameField = UITextField()
     let passwordField = UITextField()
     let checkField = UITextField()
-    let signInButton = UIButton()
+    let signupButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         title = "새벽농장 가입하기"
         
         setConfigures()
         setUI()
         setConstraints()
+        bind()
         
     }
     
@@ -43,27 +45,36 @@ class SignUpViewController : BaseViewController {
         emailField.placeholder = "이메일 주소"
         emailField.backgroundColor = .white
         emailField.borderStyle = .roundedRect
+        emailField.addTarget(self, action: #selector(emailTextFieldDidChange(_:)), for: .editingChanged)
         
         //Nickname TextField Set
         nicknameField.placeholder = "닉네임"
         nicknameField.backgroundColor = .white
         nicknameField.borderStyle = .roundedRect
+        nicknameField.addTarget(self, action: #selector(nicknameTextFieldDidChange(_:)), for: .editingChanged)
         
         //Password TextField Set
         passwordField.placeholder = "비밀번호"
         passwordField.backgroundColor = .white
         passwordField.borderStyle = .roundedRect
+        passwordField.isSecureTextEntry = true
+        passwordField.addTarget(self, action: #selector(passwordTextFieldDidChange(_:)), for: .editingChanged)
         
         //Check TextField Set
         checkField.placeholder = "비밀번호 확인"
         checkField.backgroundColor = .white
         checkField.borderStyle = .roundedRect
+        checkField.isSecureTextEntry = true
+        checkField.addTarget(self, action: #selector(checkTextFieldDidChange(_:)), for: .editingChanged)
         
         //SignIn Button Set
-        signInButton.backgroundColor = .gray
-        signInButton.setTitleColor(UIColor.white, for: .normal)
-        signInButton.setTitle("가입하기", for: .normal)
-        signInButton.layer.cornerRadius = 10
+        signupButton.backgroundColor = .black
+        signupButton.setTitleColor(UIColor.white, for: .normal)
+        signupButton.setTitle("가입하기", for: .normal)
+        signupButton.layer.cornerRadius = 10
+        signupButton.alpha = 0.5
+        signupButton.isEnabled = false
+        signupButton.addTarget(self, action: #selector(signInButtonClicked), for: .touchUpInside)
         
     }
     
@@ -74,7 +85,7 @@ class SignUpViewController : BaseViewController {
         view.addSubview(nicknameField)
         view.addSubview(passwordField)
         view.addSubview(checkField)
-        view.addSubview(signInButton)
+        view.addSubview(signupButton)
         
     }
     
@@ -114,11 +125,87 @@ class SignUpViewController : BaseViewController {
             make.height.equalTo(50)
         }
         
-        signInButton.snp.makeConstraints { make in
+        signupButton.snp.makeConstraints { make in
             make.top.equalTo(checkField.snp.bottom).offset(20)
             make.leading.equalToSuperview().inset(20)
             make.trailing.equalToSuperview().inset(20)
             make.height.equalTo(70)
+        }
+    }
+    override func bind() {
+        
+        viewModel.email.bind { text in
+            self.emailField.text = text
+        }
+        
+        viewModel.username.bind { text in
+            self.nicknameField.text = text
+        }
+        
+        viewModel.password.bind { text in
+            self.passwordField.text = text
+        }
+        
+        viewModel.checkPassword.bind { text in
+            self.checkField.text = text
+        }
+        
+        viewModel.enableBtn.bind { bool in
+            self.signupButton.isEnabled = bool
+            if bool { self.signupButton.alpha = 1 }
+            else {self.signupButton.alpha = 0.5}
+        }
+        
+    }
+    
+    @objc func emailTextFieldDidChange(_ textField: UITextField){
+        viewModel.email.value = textField.text ?? ""
+        if viewModel.checkFullText() {
+            viewModel.enableBtn.value = true
+        } else {
+            viewModel.enableBtn.value = false
+        }
+    }
+    
+    @objc func nicknameTextFieldDidChange(_ textField: UITextField){
+        viewModel.username.value = textField.text ?? ""
+        if viewModel.checkFullText() {
+            viewModel.enableBtn.value = true
+        } else {
+            viewModel.enableBtn.value = false
+        }
+    }
+    
+    @objc func passwordTextFieldDidChange(_ textField: UITextField){
+        viewModel.password.value = textField.text ?? ""
+        if viewModel.checkFullText() {
+            viewModel.enableBtn.value = true
+        } else {
+            viewModel.enableBtn.value = false
+        }
+    }
+    
+    @objc func checkTextFieldDidChange(_ textField: UITextField){
+        viewModel.checkPassword.value = textField.text ?? ""
+        if viewModel.checkFullText() {
+            viewModel.enableBtn.value = true
+        } else {
+            viewModel.enableBtn.value = false
+        }
+    }
+    
+    @objc func signInButtonClicked(){
+        
+        viewModel.signupToMain {
+            if self.viewModel.errorMessage == "" {
+                self.showToast(message: "회원가입 완료!", font: .systemFont(ofSize: 15), width: 150, height: 40)
+                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } else {
+                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 250, height: 40)
+            }
+            
         }
     }
 }
