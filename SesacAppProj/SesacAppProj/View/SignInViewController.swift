@@ -152,11 +152,9 @@ class SignInViewController : BaseViewController {
     
     @objc func loginBtnClicked(){
         
-        self.showToast(message: "로그인 완료!", font: .systemFont(ofSize: 15), width: 250, height: 40)
-        
         viewModel.signinToMain {
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1 , execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 //로그인 성공후 화면전환
                 guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {return}
                 
@@ -165,6 +163,12 @@ class SignInViewController : BaseViewController {
                 windowScene.windows.first?.makeKeyAndVisible()
             })
         }
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            if self.viewModel.errorMessage != "" {
+                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
+            } else {
+                self.showToast(message: "로그인 완료!", font: .systemFont(ofSize: 15), width: 250, height: 40)
+            }
+        })
     }
 }
