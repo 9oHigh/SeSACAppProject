@@ -152,9 +152,10 @@ class SignInViewController : BaseViewController {
     
     @objc func loginBtnClicked(){
         
-        self.showToast(message: viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 250, height: 40)
+        self.showToast(message: "로그인 완료!", font: .systemFont(ofSize: 15), width: 250, height: 40)
         
         viewModel.signinToMain {
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1 , execute: {
                 //로그인 성공후 화면전환
                 guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {return}

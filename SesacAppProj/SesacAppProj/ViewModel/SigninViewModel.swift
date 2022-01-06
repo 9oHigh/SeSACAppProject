@@ -45,8 +45,7 @@ class SigninViewModel {
                 guard let user = user else {
                     return
                 }
-                
-                
+
                 //해당 로그인 정보를 가지고 올 수 있었을 경우 토큰을 저장하기
                 UserDefaults.standard.set(user.jwt,forKey: "token")
                 UserDefaults.standard.set(user.user.username,forKey: "nickname")
