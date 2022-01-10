@@ -16,6 +16,7 @@ class DetailPostTableViewCell: UITableViewCell {
     var userNickname = UILabel()
     var userComment = UILabel()
     var menuButton = UIButton()
+    //var menuObject = Menu()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -48,8 +49,10 @@ class DetailPostTableViewCell: UITableViewCell {
         
         //Button -> ViewController에서 메뉴달기
         menuButton.backgroundColor = .white
-        menuButton.tintColor = .gray
-        menuButton.setImage(UIImage(systemName: "scissors.badge.ellipsis"), for: .normal)
+        menuButton.tintColor = .lightGray
+        //MARK: 버튼의 메뉴 다시
+        //menuButton.menu = menuObject.menu
+        menuButton.setImage(UIImage(named: "menu.png"), for: .normal)
     }
     
     func setUI(){
@@ -72,8 +75,8 @@ class DetailPostTableViewCell: UITableViewCell {
             make.top.equalTo(15)
             make.trailing.equalTo(-15)
             make.leading.equalTo(userNickname.snp.trailing)
-            make.height.equalTo(10)
-            make.width.equalTo(10)
+            make.height.equalTo(15)
+            make.width.equalTo(15)
         }
         
         userComment.snp.makeConstraints { make in

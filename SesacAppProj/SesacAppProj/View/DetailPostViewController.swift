@@ -14,13 +14,12 @@ class DetailPostViewController : BaseViewController {
     var commentTextField = UITextField()
     
     var headerView = PostTopView()
+    var menuObject = Menu()
     var viewModel = DetailPostViewModel()
     var postId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "게시물"
         
         setConfigures()
         setUI()
@@ -59,7 +58,11 @@ class DetailPostViewController : BaseViewController {
         }
     }
     override func setConfigures() {
+        title = "게시물"
         view.backgroundColor = .systemGray4
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(named: "menuSmall.png"), primaryAction: nil, menu: menuObject.menu)
+        
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
     }
@@ -111,6 +114,8 @@ extension DetailPostViewController : UITableViewDelegate,UITableViewDataSource{
         let path  = viewModel.cellForRowAt(at: indexPath)
         
         cell.userNickname.text = path.user.username
+        //셀의 버튼 메뉴 다시 
+        //cell.menuButton.menu = menuObject.menu
         cell.userComment.text = path.comment
         
         return cell

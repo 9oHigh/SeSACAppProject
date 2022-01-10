@@ -59,7 +59,7 @@ public class APIService {
         
         URLSession.request(endpoint: request, completion: completion)
     }
-    
+    //답글들
     static func getComments(postId : String,token: String, completion: @escaping (Comments?, APIError?) -> Void) {
         let url = URL(string: "\(Endpoint.comments.url)\(postId)")!
 
@@ -70,7 +70,7 @@ public class APIService {
         URLSession.request(endpoint: request, completion: completion)
     }
     
-    static func writePost(token: String, text: String, completion: @escaping (Post?, APIError?) -> Void){
+    static func uploadPost(token: String, text: String, completion: @escaping (PostElement?, APIError?) -> Void){
         
         let url = Endpoint.uploadPost.url
         var request = URLRequest(url: url)

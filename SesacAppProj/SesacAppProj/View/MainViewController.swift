@@ -103,12 +103,15 @@ class MainViewController: BaseViewController {
             }
         }
     }
-    
-    //MARK: Push Write Page
+
     @objc func plusBtnClicked(){
+        let viewController = WriteViewController()
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
+
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }
 
 extension MainViewController : UITableViewDelegate,UITableViewDataSource {
@@ -140,7 +143,7 @@ extension MainViewController : UITableViewDelegate,UITableViewDataSource {
         
         let viewController = DetailPostViewController()
         let backBarButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        
+        //어떤 포스트인가 - postId
         let path = viewModel.cellForRowAt(at: indexPath)
         viewController.postId = String(path.id)
 
