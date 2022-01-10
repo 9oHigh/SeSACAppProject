@@ -27,6 +27,7 @@ class WriteViewController : BaseViewController {
         //View
         view.backgroundColor = .white
         title = "새싹심기🔥"
+        
         //완료
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(saveButtonClicked))
         
@@ -53,14 +54,28 @@ class WriteViewController : BaseViewController {
     }
     
     @objc func saveButtonClicked(){
+        
         if viewModel.inputText.value.count == 0 {
+            
             self.showToast(message: "최소 한글자 이상 입력하세요.", font: .systemFont(ofSize: 17), width: 250, height: 45)
+            
         } else {
-            //저장
-            viewModel.uploadPost {
-                self.showToast(message: "저장완료!", font: .systemFont(ofSize: 17), width: 150, height: 40)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.navigationController?.popViewController(animated: true)
+            
+            if viewModel.postId.value == "" {
+                
+                viewModel.uploadPost {
+                    self.showToast(message: "저장완료!", font: .systemFont(ofSize: 17), width: 150, height: 40)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            } else {
+                
+                viewModel.modifyPost {
+                    self.showToast(message: "수정완료!", font: .systemFont(ofSize: 17), width: 150, height: 40)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
                 }
             }
         }

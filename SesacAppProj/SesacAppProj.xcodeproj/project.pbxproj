@@ -34,7 +34,6 @@
 		4C86E0F92786F8EB00963717 /* DetailPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0F82786F8EB00963717 /* DetailPostViewModel.swift */; };
 		4C86E0FB27870AAE00963717 /* UILabel + Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0FA27870AAE00963717 /* UILabel + Class.swift */; };
 		4C86E125278BF68700963717 /* String + Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E124278BF68700963717 /* String + Date + Extension.swift */; };
-		4C86E127278C088800963717 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E126278C088800963717 /* Menu.swift */; };
 		4C86E129278C30B700963717 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E128278C30B700963717 /* WriteViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +64,6 @@
 		4C86E0F82786F8EB00963717 /* DetailPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewModel.swift; sourceTree = "<group>"; };
 		4C86E0FA27870AAE00963717 /* UILabel + Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Class.swift"; sourceTree = "<group>"; };
 		4C86E124278BF68700963717 /* String + Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Date + Extension.swift"; sourceTree = "<group>"; };
-		4C86E126278C088800963717 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		4C86E128278C30B700963717 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,7 +138,6 @@
 			children = (
 				4C86E0DD2785B98E00963717 /* Observable.swift */,
 				4C86E0C7278489C000963717 /* Model.swift */,
-				4C86E126278C088800963717 /* Menu.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,7 +257,6 @@
 				4C86E08827834DEE00963717 /* SceneDelegate.swift in Sources */,
 				4C86E0E52785FA6700963717 /* SigninViewModel.swift in Sources */,
 				4C86E0F52786E4B800963717 /* DetailPostTableViewCell.swift in Sources */,
-				4C86E127278C088800963717 /* Menu.swift in Sources */,
 				4C86E0DE2785B98E00963717 /* Observable.swift in Sources */,
 				4C86E0C8278489C000963717 /* Model.swift in Sources */,
 				4C86E129278C30B700963717 /* WriteViewModel.swift in Sources */,

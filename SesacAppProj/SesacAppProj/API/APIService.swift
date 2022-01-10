@@ -80,15 +80,25 @@ public class APIService {
         
         URLSession.request(endpoint: request, completion: completion)
     }
-    //수정 : posts/id
-//    static func modifyPost(token: String, text: String, completion: @escaping (Post?, APIError?) -> Void){
-//        
-//        let url = Endpoint.uploadPosts.url
-//        var request = URLRequest(url: url)
-//        request.httpMethod = HttpMethod.POST.rawValue
-//        request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
-//        request.setValue("Bearer \(token)", forHTTPHeaderField: "authorization")
-//        
-//        URLSession.request(endpoint: request, completion: completion)
-//    }
+    
+    static func modifyPost(postId : String,text : String,token: String, completion: @escaping (PostElement?, APIError?) -> Void){
+        
+        let url = URL(string: "\(Endpoint.post.url)\(postId)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = HttpMethod.PUT.rawValue
+        request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "authorization")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        URLSession.request(endpoint: request, completion: completion)
+    }
+    static func deletePost(postId : String,token: String, completion: @escaping (PostElement?, APIError?) -> Void){
+        
+        let url = URL(string: "\(Endpoint.post.url)\(postId)")!
+
+        var request = URLRequest(url: url)
+        request.httpMethod = HttpMethod.DELETE.rawValue
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "authorization")
+
+        URLSession.request(endpoint: request, completion: completion)
+    }
 }

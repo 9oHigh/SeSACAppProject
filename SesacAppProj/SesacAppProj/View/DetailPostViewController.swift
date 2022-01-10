@@ -11,12 +11,36 @@ import UIKit
 class DetailPostViewController : BaseViewController {
     
     var tableView = UITableView(frame: CGRect(), style: .grouped)
-    var commentTextField = UITextField()
+    var commentTextField = UITextField() // 하단에 넣기
     
     var headerView = PostTopView()
-    var menuObject = Menu()
     var viewModel = DetailPostViewModel()
+    
+    var menuItems: [UIAction] {
+        return [
+            UIAction(title: "수정하기", image: UIImage(systemName: "pencil"), handler: { _ in
+                let viewController = WriteViewController()
+                viewController.viewModel.postId.value = self.postId
+                viewController.viewModel.inputText.value = self.viewModel.post.value.text
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }),
+            UIAction(title: "삭제하기", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { _ in
+                //삭제 구현
+                self.viewModel.deletePost(postId: self.postId) {
+                    print("FUNCTION")
+                    self.showToast(message: "삭제완료!", font: .systemFont(ofSize: 17), width: 150, height: 40)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            })
+        ]
+    }
+    var menu: UIMenu {
+        return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
+    }
     var postId = ""
+    var userId = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,12 +80,16 @@ class DetailPostViewController : BaseViewController {
                 self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
             }
         }
+        //자신의 게시물일 경우에만 메뉴바 사용가능
+        if userId != UserDefaults.standard.object(forKey: "id") as? Int{
+            self.navigationItem.rightBarButtonItem = nil
+        } else {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(named: "menuSmall.png"), primaryAction: nil, menu: menu )
+        }
     }
     override func setConfigures() {
         title = "게시물"
         view.backgroundColor = .systemGray4
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(named: "menuSmall.png"), primaryAction: nil, menu: menuObject.menu)
         
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
@@ -114,7 +142,7 @@ extension DetailPostViewController : UITableViewDelegate,UITableViewDataSource{
         let path  = viewModel.cellForRowAt(at: indexPath)
         
         cell.userNickname.text = path.user.username
-        //셀의 버튼 메뉴 다시 
+        //셀의 버튼 메뉴 다시
         //cell.menuButton.menu = menuObject.menu
         cell.userComment.text = path.comment
         
@@ -137,3 +165,5 @@ extension DetailPostViewController : UITableViewDelegate,UITableViewDataSource{
     }
     
 }
+
+

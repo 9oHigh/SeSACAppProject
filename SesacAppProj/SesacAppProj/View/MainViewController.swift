@@ -146,7 +146,9 @@ extension MainViewController : UITableViewDelegate,UITableViewDataSource {
         //어떤 포스트인가 - postId
         let path = viewModel.cellForRowAt(at: indexPath)
         viewController.postId = String(path.id)
-
+        //유저아이디가 같으면 메뉴를 보여주고 같지 않다면 제거
+        viewController.userId = path.user.id
+        
         self.navigationItem.backBarButtonItem = backBarButton
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.pushViewController(viewController, animated: true)
@@ -157,4 +159,3 @@ extension MainViewController : UITableViewDelegate,UITableViewDataSource {
         plusBtn.frame.origin.y = UIScreen.main.bounds.height - 220 + scrollView.contentOffset.y
     }
 }
-

@@ -22,7 +22,6 @@ enum Endpoint {
     case comments
     case changePWD
     case uploadPost
-//    case updatePost
 //    case deletePost
 //    case uploadComment
 //    case updateComment
