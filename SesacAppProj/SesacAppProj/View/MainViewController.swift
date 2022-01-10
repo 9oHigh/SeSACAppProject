@@ -126,7 +126,10 @@ extension MainViewController : UITableViewDelegate,UITableViewDataSource {
         
         cell.nicknameLabel.text = path.user.username
         cell.contentLabel.text = path.text
-        cell.createAtLabel.text = path.createdAt
+        
+        let newDate = path.createdAt.toDate()?.toString()
+        cell.createAtLabel.text = newDate
+        
         cell.commentLabel.text = path.comments.count == 0 ? "댓글쓰기" : "댓글 \(path.comments.count)개"
         cell.commentImageView.image = path.comments.count == 0 ? UIImage(systemName: "bubble.right") : UIImage(systemName: "bubble.right.fill")
 

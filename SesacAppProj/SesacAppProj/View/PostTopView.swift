@@ -102,14 +102,14 @@ class PostTopView : UIView {
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalTo(middleView.snp.top).offset(-2)
+            make.bottom.equalTo(middleView.snp.top)
         }
         
         middleView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalTo(bottomView.snp.top).offset(-2)
+            make.bottom.equalTo(bottomView.snp.top)
         }
         
         bottomView.snp.makeConstraints { make in
@@ -127,8 +127,8 @@ class PostTopView : UIView {
         }
         
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(10)
-            make.leading.equalTo(userImageView.snp.trailing).offset(10)
+            make.top.equalTo(0)
+            make.leading.equalTo(userImageView.snp.trailing)
             make.bottom.equalTo(createAtLabel.snp.top)
         }
         

@@ -87,7 +87,8 @@ class DetailPostViewController : BaseViewController {
         viewModel.post.bind { post in
             DispatchQueue.main.async {
                 self.headerView.nicknameLabel.text = post.user.username
-                self.headerView.createAtLabel.text = post.createdAt
+                let newDate = post.createdAt.toDate()?.toString()
+                self.headerView.createAtLabel.text = newDate
                 self.headerView.contentLabel.text = post.text
                 self.headerView.commentCntLabel.text = "댓글 \(post.comments.count)개"
                 self.headerView.commentImageView.image = post.comments.count == 0 ? UIImage(systemName: "bubble.right") : UIImage(systemName: "bubble.right.fill")
@@ -113,16 +114,21 @@ extension DetailPostViewController : UITableViewDelegate,UITableViewDataSource{
         cell.userComment.text = path.comment
         
         return cell
-
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
+        
         return headerView
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UITableView.automaticDimension
+        //Comment가 없을 때 레이아웃이 깨짐.. 이유가 뭘까👀
+        if viewModel.comment.value.count == 0{
+            return 150
+        } else {
+            return UITableView.automaticDimension
+        }
     }
     
 }
