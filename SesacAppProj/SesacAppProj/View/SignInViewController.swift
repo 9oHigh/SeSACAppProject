@@ -151,10 +151,10 @@ class SignInViewController : BaseViewController {
     }
     
     @objc func loginBtnClicked(){
-        
-        viewModel.signinToMain {
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+        //DispatchQueue가 아닌 다른 방법을 생각해보자. 추후 리팩토링
+        viewModel.signin {
+            //로그인 완료 메세지 이후..
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                 //로그인 성공후 화면전환
                 guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {return}
                 
@@ -163,7 +163,7 @@ class SignInViewController : BaseViewController {
                 windowScene.windows.first?.makeKeyAndVisible()
             })
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             if self.viewModel.errorMessage != "" {
                 self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
             } else {

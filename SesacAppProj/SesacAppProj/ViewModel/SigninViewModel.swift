@@ -14,7 +14,7 @@ class SigninViewModel {
     
     var errorMessage : String = ""
     
-    func signinToMain(completion: @escaping () -> Void){
+    func signin(completion: @escaping () -> Void){
         
         APIService.signin(identifier: email.value, password: password.value) { user, error in
             
@@ -24,7 +24,7 @@ class SigninViewModel {
                     self.errorMessage = "옳바르지 않은 계정정보"
                 case .unAuthorized:
                     self.errorMessage = "만료된 계정입니다."
-                case .notFount:
+                case .notFound:
                     self.errorMessage = "알수없음"
                 case .timeout:
                     self.errorMessage = "시간초과"
@@ -43,14 +43,15 @@ class SigninViewModel {
             guard let user = user else {
                 return
             }
+            //성공했으므로 에러메세지 없음
             self.errorMessage = ""
+            
             //해당 로그인 정보를 가지고 올 수 있었을 경우 토큰을 저장하기
             UserDefaults.standard.set(user.jwt,forKey: "token")
             UserDefaults.standard.set(user.user.username,forKey: "nickname")
             UserDefaults.standard.set(user.user.id,forKey: "id")
             UserDefaults.standard.set(user.user.email,forKey: "email")
             
-            print("성공했음")
             completion()
         }
     }
@@ -64,4 +65,5 @@ class SigninViewModel {
             return false
         }
     }
+    
 }

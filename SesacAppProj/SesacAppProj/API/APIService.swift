@@ -14,7 +14,7 @@ enum APIError : Error {
     case invalidData
     case badRequest     //400
     case unAuthorized   //401
-    case notFount       //404
+    case notFound      //404
     case timeout        //408
 }
 
@@ -39,7 +39,17 @@ public class APIService {
         
         URLSession.request(endpoint: request, completion: completion)
     }
-    
+    //포스트 하나 - 셀클릭시
+    static func getPost(postId : String,token: String, completion: @escaping (PostElement?, APIError?) -> Void) {
+        
+        let url = URL(string: "\(Endpoint.post.url)\(postId)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = HttpMethod.GET.rawValue
+        request.setValue("bearer \(token)", forHTTPHeaderField: "authorization")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
+    //포스트 여러개 - 메인
     static func getPosts(token: String, completion: @escaping (Post?, APIError?) -> Void) {
         
         let url = Endpoint.posts.url
@@ -50,9 +60,9 @@ public class APIService {
         URLSession.request(endpoint: request, completion: completion)
     }
     
-    static func getComments(token: String, completion: @escaping (Post?, APIError?) -> Void) {
-        
-        let url = Endpoint.posts.url
+    static func getComments(postId : String,token: String, completion: @escaping (Comments?, APIError?) -> Void) {
+        let url = URL(string: "\(Endpoint.comments.url)\(postId)")!
+
         var request = URLRequest(url: url)
         request.httpMethod = HttpMethod.GET.rawValue
         request.setValue("bearer \(token)", forHTTPHeaderField: "authorization")
@@ -62,7 +72,7 @@ public class APIService {
     
     static func writePost(token: String, text: String, completion: @escaping (Post?, APIError?) -> Void){
         
-        let url = Endpoint.uploadPosts.url
+        let url = Endpoint.uploadPost.url
         var request = URLRequest(url: url)
         request.httpMethod = HttpMethod.POST.rawValue
         request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
@@ -70,4 +80,15 @@ public class APIService {
         
         URLSession.request(endpoint: request, completion: completion)
     }
+    //수정 : posts/id
+//    static func modifyPost(token: String, text: String, completion: @escaping (Post?, APIError?) -> Void){
+//        
+//        let url = Endpoint.uploadPosts.url
+//        var request = URLRequest(url: url)
+//        request.httpMethod = HttpMethod.POST.rawValue
+//        request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
+//        request.setValue("Bearer \(token)", forHTTPHeaderField: "authorization")
+//        
+//        URLSession.request(endpoint: request, completion: completion)
+//    }
 }

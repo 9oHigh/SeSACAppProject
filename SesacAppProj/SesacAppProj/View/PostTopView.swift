@@ -35,10 +35,10 @@ class PostTopView : UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
     }
     
     func setConfigure(){
+        
         //Top,Middle,Bottom View
         topView.backgroundColor = .white
         middleView.backgroundColor = .white
@@ -55,6 +55,8 @@ class PostTopView : UIView {
         createAtLabel.font = .systemFont(ofSize: 14)
         //userImageView
         userImageView.image = UIImage(systemName: "person")
+        userImageView.contentMode = .scaleAspectFit
+        userImageView.tintColor = .black
         
         //MiddleView
         //content
@@ -100,14 +102,14 @@ class PostTopView : UIView {
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalTo(middleView.snp.top).offset(-1)
+            make.bottom.equalTo(middleView.snp.top).offset(-2)
         }
         
         middleView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalTo(bottomView.snp.top).offset(-1)
+            make.bottom.equalTo(bottomView.snp.top).offset(-2)
         }
         
         bottomView.snp.makeConstraints { make in
@@ -115,42 +117,42 @@ class PostTopView : UIView {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
-            
         }
         
         userImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalTo(nicknameLabel.snp.leading)
-            make.bottom.equalToSuperview()
+            make.top.equalTo(0)
+            make.leading.equalTo(10)
+            make.trailing.equalTo(nicknameLabel.snp.leading).offset(-10)
+            make.bottom.equalTo(5)
         }
         
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalTo(userImageView.snp.trailing)
+            make.top.equalTo(10)
+            make.leading.equalTo(userImageView.snp.trailing).offset(10)
             make.bottom.equalTo(createAtLabel.snp.top)
         }
         
         createAtLabel.snp.makeConstraints { make in
             make.top.equalTo(nicknameLabel.snp.bottom)
-            make.leading.equalTo(userImageView.snp.trailing)
+            make.leading.equalTo(userImageView.snp.trailing).offset(10)
             make.bottom.equalToSuperview()
         }
         
         contentLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(20)
         }
         
         commentImageView.snp.makeConstraints { make in
             make.leading.equalTo(10)
-            make.top.bottom.equalToSuperview()
+            make.top.equalToSuperview()
             make.trailing.equalTo(commentCntLabel.snp.leading).offset(-5)
+            make.bottom.equalTo(-10)
         }
         
         commentCntLabel.snp.makeConstraints { make in
             make.leading.equalTo(commentImageView.snp.trailing)
-            make.top.bottom.equalToSuperview()
+            make.height.equalTo(commentImageView.snp.height)
         }
+        
     }
-    
 }

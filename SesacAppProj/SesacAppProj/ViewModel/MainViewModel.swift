@@ -18,7 +18,24 @@ class MainViewModel {
         APIService.getPosts(token: token) { post, error in
 
             if let error = error {
-                self.errorMessage = "오류가 발생했습니다.\(error)"
+                switch error {
+                case .failed:
+                    self.errorMessage = "데이터 로드 실패"
+                case .noData:
+                    self.errorMessage = "데이터가 없음"
+                case .invalidResponse:
+                    self.errorMessage = "잘못된 응답"
+                case .invalidData:
+                    self.errorMessage = "잘못된 데이터"
+                case .badRequest:
+                    self.errorMessage = "잘못된 요청입니다."
+                case .unAuthorized:
+                    self.errorMessage  = "만료된 계정입니다."
+                case .notFound:
+                    self.errorMessage = "찾을 수 없습니다."
+                case .timeout:
+                    self.errorMessage = "시간이 초과되었습니다."
+                }
             }
             
             guard let post = post else {
@@ -30,6 +47,7 @@ class MainViewModel {
         completion()
     }
 }
+
 //뷰모델에서 바로 테이블에 사용할 수 있게
 extension MainViewModel {
     

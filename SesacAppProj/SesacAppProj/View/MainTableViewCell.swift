@@ -13,7 +13,7 @@ class MainTableViewCell: UITableViewCell {
     static let identifier = "MainTableViewCell"
     
     var topView = UIView()
-    var nicknameLabel = UILabel()
+    var nicknameLabel = PaddingLabel()
     var contentLabel = UILabel()
     var createAtLabel = UILabel()
     
@@ -48,6 +48,9 @@ class MainTableViewCell: UITableViewCell {
         nicknameLabel.backgroundColor = .systemGray5
         nicknameLabel.textColor = .darkGray
         nicknameLabel.font = .systemFont(ofSize: 14)
+        nicknameLabel.layer.cornerRadius = 5
+        nicknameLabel.clipsToBounds = true
+        
         
         //content
         contentLabel.numberOfLines = 2
@@ -93,7 +96,7 @@ class MainTableViewCell: UITableViewCell {
     func setConstraints(){
         
         topView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(4)
+            make.top.equalToSuperview().offset(8)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.7)

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class DetailPostTableViewCell: UITableViewCell {
 
@@ -23,7 +24,6 @@ class DetailPostTableViewCell: UITableViewCell {
         setConfigure()
         setUI()
         setConstraints()
-    
     }
     
     required init?(coder: NSCoder) {
@@ -39,12 +39,12 @@ class DetailPostTableViewCell: UITableViewCell {
         userNickname.backgroundColor = .white
         userNickname.textColor = .black
         userNickname.textAlignment = .left
-        userNickname.font = .boldSystemFont(ofSize: 14)
+        userNickname.font = .boldSystemFont(ofSize: 16)
         
         userComment.backgroundColor = .white
-        userNickname.textColor = .black
+        userComment.textColor = .black
         userComment.numberOfLines = 0
-        userComment.font = .systemFont(ofSize: 14)
+        userComment.font = .systemFont(ofSize: 15)
         
         //Button -> ViewController에서 메뉴달기
         menuButton.backgroundColor = .white
@@ -62,27 +62,25 @@ class DetailPostTableViewCell: UITableViewCell {
     func setConstraints(){
      
         userNickname.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.top.equalTo(15)
+            make.leading.equalTo(15)
             make.trailing.equalTo(menuButton.snp.leading)
             make.bottom.equalTo(userComment.snp.top)
         }
         
         menuButton.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.top.equalTo(15)
+            make.trailing.equalTo(-15)
             make.leading.equalTo(userNickname.snp.trailing)
-            make.height.equalTo(20)
+            make.height.equalTo(10)
+            make.width.equalTo(10)
         }
         
         userComment.snp.makeConstraints { make in
             make.top.equalTo(userNickname.snp.bottom)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.leading.equalTo(15)
+            make.trailing.equalTo(-15)
+            make.bottom.equalTo(-10)
         }
-        
-        
     }
-    
 }

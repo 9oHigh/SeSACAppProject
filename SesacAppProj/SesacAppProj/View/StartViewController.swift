@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK: 가입 + 로그인
+//MARK: 회원가입
 class StartViewController : BaseViewController {
     
     //중앙
@@ -31,8 +31,6 @@ class StartViewController : BaseViewController {
     
     override func setConfigures() {
         view.backgroundColor = .white
-        
-        //MARK: 상단 Configures
         
         //ImageView Set
         sesacImageView.image = UIImage(named: "logo_ssac_clear.png")

@@ -32,6 +32,7 @@
 		4C86E0F52786E4B800963717 /* DetailPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0F42786E4B800963717 /* DetailPostTableViewCell.swift */; };
 		4C86E0F72786E96A00963717 /* PostTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0F62786E96A00963717 /* PostTopView.swift */; };
 		4C86E0F92786F8EB00963717 /* DetailPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0F82786F8EB00963717 /* DetailPostViewModel.swift */; };
+		4C86E0FB27870AAE00963717 /* UILabel + Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0FA27870AAE00963717 /* UILabel + Class.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		4C86E0F42786E4B800963717 /* DetailPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostTableViewCell.swift; sourceTree = "<group>"; };
 		4C86E0F62786E96A00963717 /* PostTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTopView.swift; sourceTree = "<group>"; };
 		4C86E0F82786F8EB00963717 /* DetailPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewModel.swift; sourceTree = "<group>"; };
+		4C86E0FA27870AAE00963717 /* UILabel + Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Class.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				4C86E0C02784762C00963717 /* UIViewController + Extension.swift */,
+				4C86E0FA27870AAE00963717 /* UILabel + Class.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				4C86E08627834DEE00963717 /* AppDelegate.swift in Sources */,
 				4C86E0B927845A8900963717 /* SignUpViewController.swift in Sources */,
 				4C86E0F12786E41B00963717 /* DetailPostViewController.swift in Sources */,
+				4C86E0FB27870AAE00963717 /* UILabel + Class.swift in Sources */,
 				4C86E0E72786080800963717 /* MainTableViewCell.swift in Sources */,
 				4C86E0AB27843F8500963717 /* APIService.swift in Sources */,
 				4C86E0B727845A7C00963717 /* SignInViewController.swift in Sources */,

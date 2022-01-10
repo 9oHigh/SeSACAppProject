@@ -17,9 +17,16 @@ enum HttpMethod : String{
 enum Endpoint {
     case signup
     case signin
-    case changePWD
-    case uploadPosts
+    case post
     case posts
+    case comments
+    case changePWD
+    case uploadPost
+//    case updatePost
+//    case deletePost
+//    case uploadComment
+//    case updateComment
+//    case deleteComment
 }
 
 extension Endpoint {
@@ -29,8 +36,13 @@ extension Endpoint {
         case .signup: return .makeEndpoint("auth/local/register")
         case .signin: return .makeEndpoint("auth/local")
         case.changePWD : return .makeEndpoint("custom/change-password")
-        case .uploadPosts: return .makeEndpoint("posts")
+        case .post:
+            return .makeEndpoint("posts/")
         case .posts : return .makeEndpoint("posts?_sort=created_at:desc")
+        case .uploadPost: return .makeEndpoint("posts")
+        case .comments:
+            return .makeEndpoint("comments?post=")
+        
         }
     }
 }
@@ -76,14 +88,14 @@ extension URLSession {
             
             guard response.statusCode == 200 else {
                 switch response.statusCode {
-                case 400 : completion(nil,.badRequest)
-                case 401: completion(nil,.unAuthorized)
-                case 404: completion(nil,.notFount)
-                case 408: completion(nil,.timeout)
-                default:
+                    case 400 : completion(nil,.badRequest)
+                    case 401: completion(nil,.unAuthorized)
+                    case 404: completion(nil,.notFound)
+                    case 408: completion(nil,.timeout)
+                    default:
                     completion(nil,.failed)
                 }
-                print(response.statusCode)
+                print("오류 코드 안내 : ",response.statusCode)
                 return
             }
             
@@ -92,8 +104,10 @@ extension URLSession {
                 let decoded = try decoder.decode(T.self, from: data)
                 completion(decoded, nil)
             } catch {
+                print("Decode Error")
                 completion(nil,.invalidData)
             }
+            
         }
     }
 }

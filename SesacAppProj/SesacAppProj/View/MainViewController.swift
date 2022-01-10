@@ -17,12 +17,14 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "새싹농장🌱"
-        
         setConfigures()
         setUI()
         setConstraints()
         bind()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         viewModel.receivePosts{
             if self.viewModel.errorMessage != ""{
                 self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
@@ -30,14 +32,26 @@ class MainViewController: BaseViewController {
         }
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
+        viewModel.receivePosts {
+            if self.viewModel.errorMessage != ""{
+                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
+            }
+        }
     }
     
     override func setConfigures() {
-        //Main
+        
+        //Main + 왼쪽 타이틀
         view.backgroundColor = .white
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "새싹농장🌱"
+        titleLabel.font = .boldSystemFont(ofSize: 18)
+        titleLabel.textColor = .black
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: titleLabel)
         
         //TableView
         tableView.delegate = self
@@ -77,7 +91,8 @@ class MainViewController: BaseViewController {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-
+        
+        //Frame
         plusBtn.frame = CGRect(x: (UIScreen.main.bounds.width * 2 + 30) / 3, y:UIScreen.main.bounds.height - 220 , width: 80, height: 80)
     }
     
@@ -89,7 +104,7 @@ class MainViewController: BaseViewController {
         }
     }
     
-    //MARK: PUSH Write Page
+    //MARK: Push Write Page
     @objc func plusBtnClicked(){
         
     }
@@ -108,6 +123,7 @@ extension MainViewController : UITableViewDelegate,UITableViewDataSource {
         }
         
         let path = viewModel.cellForRowAt(at: indexPath)
+        
         cell.nicknameLabel.text = path.user.username
         cell.contentLabel.text = path.text
         cell.createAtLabel.text = path.createdAt
@@ -118,9 +134,19 @@ extension MainViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //MARK: PUSH Comment Page
+        
+        let viewController = DetailPostViewController()
+        let backBarButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        let path = viewModel.cellForRowAt(at: indexPath)
+        viewController.postId = String(path.id)
+
+        self.navigationItem.backBarButtonItem = backBarButton
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.pushViewController(viewController, animated: true)
         
     }
+    //스크롤시에도 버튼 고정
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         plusBtn.frame.origin.y = UIScreen.main.bounds.height - 220 + scrollView.contentOffset.y
     }

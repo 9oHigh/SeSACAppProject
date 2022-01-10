@@ -11,7 +11,7 @@ class SignUpViewController : BaseViewController {
     
     var viewModel = SignupViewModel()
     
-    let recruitLabel = UILabel() //모집중 라벨!
+    let recruitLabel = UILabel()
     let emailField = UITextField()
     let nicknameField = UITextField()
     let passwordField = UITextField()
@@ -39,7 +39,6 @@ class SignUpViewController : BaseViewController {
         recruitLabel.text = "바람의 나라\n문파원 모집중🎉"
         recruitLabel.textColor = .black
         recruitLabel.textAlignment = .center
-        
         
         //Email TextField Set
         emailField.placeholder = "이메일 주소"
@@ -74,7 +73,7 @@ class SignUpViewController : BaseViewController {
         signupButton.layer.cornerRadius = 10
         signupButton.alpha = 0.5
         signupButton.isEnabled = false
-        signupButton.addTarget(self, action: #selector(signInButtonClicked), for: .touchUpInside)
+        signupButton.addTarget(self, action: #selector(signupButtonClicked), for: .touchUpInside)
         
     }
     
@@ -194,12 +193,12 @@ class SignUpViewController : BaseViewController {
         }
     }
     
-    @objc func signInButtonClicked(){
-        
-        viewModel.signupToMain {
+    @objc func signupButtonClicked(){
+        //MARK: 위와 마찬가지로 ViewModel의 역할을 다시 고민해봐야함
+        viewModel.signup {
             if self.viewModel.errorMessage == "" {
                 self.showToast(message: "회원가입 완료!", font: .systemFont(ofSize: 15), width: 150, height: 40)
-                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.navigationController?.popViewController(animated: true)
                 }
             } else {
