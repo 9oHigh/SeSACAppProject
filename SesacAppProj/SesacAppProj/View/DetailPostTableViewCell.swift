@@ -12,16 +12,25 @@ class DetailPostTableViewCell: UITableViewCell {
 
     static let identifier = "DetailPostTableViewCell"
     
-    //content
+    var menuButtonAction : (()->())?
     var userNickname = UILabel()
     var userComment = UILabel()
-    var menuButton = UIButton()
-    //var menuObject = Menu()
+   
+    var menuButton : UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .white
+        button.tintColor = .lightGray
+        button.setImage(UIImage(named: "menu.png"), for: .normal)
+        return button
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
+        contentView.isUserInteractionEnabled = true
+        self.menuButton.addTarget(self, action: #selector(menuButtonClicked), for: .touchUpInside)
+        
         setConfigure()
         setUI()
         setConstraints()
@@ -46,13 +55,7 @@ class DetailPostTableViewCell: UITableViewCell {
         userComment.textColor = .black
         userComment.numberOfLines = 0
         userComment.font = .systemFont(ofSize: 15)
-        
-        //Button -> ViewController에서 메뉴달기
-        menuButton.backgroundColor = .white
-        menuButton.tintColor = .lightGray
-        //MARK: 버튼의 메뉴 다시
-        //menuButton.menu = menuObject.menu
-        menuButton.setImage(UIImage(named: "menu.png"), for: .normal)
+
     }
     
     func setUI(){
@@ -85,5 +88,8 @@ class DetailPostTableViewCell: UITableViewCell {
             make.trailing.equalTo(-15)
             make.bottom.equalTo(-10)
         }
+    }
+    @objc func menuButtonClicked(){
+        menuButtonAction?()
     }
 }

@@ -80,6 +80,18 @@ public class APIService {
         
         URLSession.request(endpoint: request, completion: completion)
     }
+    
+    static func deleteComment(commentId: Int,token: String, completion: @escaping (CommentElement?, APIError?) -> Void) {
+        let url = URL(string: "\(Endpoint.uploadComment.url)/\(commentId)")!
+        print("\(url)")
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = HttpMethod.DELETE.rawValue
+       
+        request.setValue("bearer \(token)", forHTTPHeaderField: "authorization")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
     static func uploadPost(token: String, text: String, completion: @escaping (PostElement?, APIError?) -> Void){
         
         let url = Endpoint.uploadPost.url
@@ -104,7 +116,7 @@ public class APIService {
     static func deletePost(postId : String,token: String, completion: @escaping (PostElement?, APIError?) -> Void){
         
         let url = URL(string: "\(Endpoint.post.url)\(postId)")!
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = HttpMethod.DELETE.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "authorization")

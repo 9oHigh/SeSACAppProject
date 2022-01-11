@@ -79,16 +79,7 @@ class DetailPostViewController : BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.recievePost(postId: self.postId) {
-            if self.viewModel.errorMessage != ""{
-                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
-            }
-        }
-        viewModel.receiveComments(postId: self.postId) {
-            if self.viewModel.errorMessage != ""{
-                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
-            }
-        }
+        fetch()
     }
     override func setConfigures() {
         
@@ -184,6 +175,9 @@ class DetailPostViewController : BaseViewController {
     }
     
     @objc func pushButtonClicked(){
+        if viewModel.comment.value == "" {
+            self.showToast(message: "최소 한글자 이상 입력하세요.", font: .systemFont(ofSize: 16), width: 250, height: 40)
+        } else {
         viewModel.uploadComment(postId: postId, comment: self.viewModel.comment.value) {
             
             if self.viewModel.errorMessage != "" {
@@ -192,20 +186,14 @@ class DetailPostViewController : BaseViewController {
             } else {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                    self.viewModel.recievePost(postId: self.postId) {
-                        if self.viewModel.errorMessage != ""{
-                            self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
-                        }
-                    }
-                    self.viewModel.receiveComments(postId: self.postId) {
-                        if self.viewModel.errorMessage != ""{
-                            self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
-                        }
-                    }
+                    //포스트가 수정되었을수도 있음
+                    self.fetch()
                     self.commentTextField.text = ""
                     self.showToast(message: "댓글을 저장했습니다.", font: .systemFont(ofSize: 17), width: 180, height: 40)
+                    self.tableView.reloadData()
                 })
             }
+        }
         }
     }
     
@@ -230,7 +218,23 @@ extension DetailPostViewController : UITableViewDelegate,UITableViewDataSource{
         
         cell.userNickname.text = path.user.username
         cell.userComment.text = path.comment
+        //자신이 단 댓글만 수정, 삭제 가능
+        cell.menuButton.tag = indexPath.row
+        cell.menuButton.menu = menu
         
+        if path.user.id != UserDefaults.standard.object(forKey: "id") as? Int{
+            cell.menuButton.isHidden = true
+        } else {
+            
+            cell.menuButtonAction = { [unowned self] in
+                self.showAlert(commentNum: path.id )
+                print(path.id)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+
         return cell
     }
     
@@ -241,11 +245,55 @@ extension DetailPostViewController : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        //Comment가 없을 때 레이아웃이 깨짐.. 이유가 뭘까👀
+        //Comment가 없을 때 레이아웃이 깨짐.. 리팩토링 👀
         if viewModel.comments.value.count == 0 {
             return 150
         } else {
             return UITableView.automaticDimension
+        }
+    }
+}
+
+extension DetailPostViewController {
+    
+    func showAlert(commentNum : Int) {
+        
+        let alert = UIAlertController(title: "댓글", message: nil, preferredStyle: .actionSheet)
+        
+        let modify = UIAlertAction(title: "수정", style: .default) { action in
+            //수정화면 띄우기
+        }
+        let delete = UIAlertAction(title: "삭제", style: .destructive) { action in
+            //삭제
+            self.viewModel.deleteComment(commentId: commentNum) {
+                if self.viewModel.errorMessage != "" {
+                    self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 17), width: 180, height: 40)
+                }
+                else {
+                    self.showToast(message: "삭제 완료!", font: .systemFont(ofSize: 17), width: 150, height: 40)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.fetch()
+                    }
+                }
+            }
+        }
+        
+        alert.addAction(modify)
+        alert.addAction(delete)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func fetch(){
+        self.viewModel.recievePost(postId: self.postId) {
+            if self.viewModel.errorMessage != ""{
+                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
+            }
+        }
+        self.viewModel.receiveComments(postId: self.postId) {
+            if self.viewModel.errorMessage != ""{
+                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
+            }
         }
     }
 }
