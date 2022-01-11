@@ -35,6 +35,8 @@
 		4C86E0FB27870AAE00963717 /* UILabel + Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E0FA27870AAE00963717 /* UILabel + Class.swift */; };
 		4C86E125278BF68700963717 /* String + Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E124278BF68700963717 /* String + Date + Extension.swift */; };
 		4C86E129278C30B700963717 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E128278C30B700963717 /* WriteViewModel.swift */; };
+		4C86E12F278DA69E00963717 /* CommentModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E12E278DA69D00963717 /* CommentModifyViewController.swift */; };
+		4C86E131278DA74800963717 /* CommentVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E130278DA74800963717 /* CommentVIewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,8 @@
 		4C86E0FA27870AAE00963717 /* UILabel + Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Class.swift"; sourceTree = "<group>"; };
 		4C86E124278BF68700963717 /* String + Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Date + Extension.swift"; sourceTree = "<group>"; };
 		4C86E128278C30B700963717 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
+		4C86E12E278DA69D00963717 /* CommentModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModifyViewController.swift; sourceTree = "<group>"; };
+		4C86E130278DA74800963717 /* CommentVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentVIewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,7 @@
 				4C86E0F62786E96A00963717 /* PostTopView.swift */,
 				4C86E0F42786E4B800963717 /* DetailPostTableViewCell.swift */,
 				4C86E0F02786E41B00963717 /* DetailPostViewController.swift */,
+				4C86E12E278DA69D00963717 /* CommentModifyViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				4C86E0E82786107600963717 /* MainViewModel.swift */,
 				4C86E0F82786F8EB00963717 /* DetailPostViewModel.swift */,
 				4C86E128278C30B700963717 /* WriteViewModel.swift */,
+				4C86E130278DA74800963717 /* CommentVIewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -242,6 +248,7 @@
 				4C86E0A7278437F100963717 /* StartViewController.swift in Sources */,
 				4C86E0EF2786E3C600963717 /* WriteViewController.swift in Sources */,
 				4C86E08A27834DEE00963717 /* MainViewController.swift in Sources */,
+				4C86E12F278DA69E00963717 /* CommentModifyViewController.swift in Sources */,
 				4C86E08627834DEE00963717 /* AppDelegate.swift in Sources */,
 				4C86E0B927845A8900963717 /* SignUpViewController.swift in Sources */,
 				4C86E125278BF68700963717 /* String + Date + Extension.swift in Sources */,
@@ -256,6 +263,7 @@
 				4C86E0F72786E96A00963717 /* PostTopView.swift in Sources */,
 				4C86E08827834DEE00963717 /* SceneDelegate.swift in Sources */,
 				4C86E0E52785FA6700963717 /* SigninViewModel.swift in Sources */,
+				4C86E131278DA74800963717 /* CommentVIewModel.swift in Sources */,
 				4C86E0F52786E4B800963717 /* DetailPostTableViewCell.swift in Sources */,
 				4C86E0DE2785B98E00963717 /* Observable.swift in Sources */,
 				4C86E0C8278489C000963717 /* Model.swift in Sources */,

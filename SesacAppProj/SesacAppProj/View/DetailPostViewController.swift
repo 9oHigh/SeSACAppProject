@@ -31,9 +31,13 @@ class DetailPostViewController : BaseViewController {
             UIAction(title: "삭제하기", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { _ in
                 //삭제 구현
                 self.viewModel.deletePost(postId: self.postId) {
-                    self.showToast(message: "삭제완료!", font: .systemFont(ofSize: 17), width: 150, height: 40)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self.navigationController?.popViewController(animated: true)
+                    if self.viewModel.errorMessage != "" {
+                        self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 17), width: 190, height: 40)
+                    } else {
+                        self.showToast(message: "삭제완료!", font: .systemFont(ofSize: 17), width: 150, height: 40)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.navigationController?.popViewController(animated: true)
+                        }
                     }
                 }
             })
@@ -78,8 +82,8 @@ class DetailPostViewController : BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         fetch()
+        self.tableView.reloadData()
     }
     override func setConfigures() {
         
@@ -107,7 +111,6 @@ class DetailPostViewController : BaseViewController {
         commentPushButton.layer.cornerRadius = 5
         commentPushButton.setTitle("✏️", for: .normal)
         commentPushButton.addTarget(self, action: #selector(pushButtonClicked), for: .touchUpInside)
-        
     }
     
     override func setUI() {
@@ -178,22 +181,22 @@ class DetailPostViewController : BaseViewController {
         if viewModel.comment.value == "" {
             self.showToast(message: "최소 한글자 이상 입력하세요.", font: .systemFont(ofSize: 16), width: 250, height: 40)
         } else {
-        viewModel.uploadComment(postId: postId, comment: self.viewModel.comment.value) {
-            
-            if self.viewModel.errorMessage != "" {
-                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 17), width: 180, height: 40)
+            viewModel.uploadComment(postId: postId, comment: self.viewModel.comment.value) {
                 
-            } else {
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                    //포스트가 수정되었을수도 있음
-                    self.fetch()
-                    self.commentTextField.text = ""
-                    self.showToast(message: "댓글을 저장했습니다.", font: .systemFont(ofSize: 17), width: 180, height: 40)
-                    self.tableView.reloadData()
-                })
+                if self.viewModel.errorMessage != "" {
+                    self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 17), width: 180, height: 40)
+                    
+                } else {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                        //포스트가 수정되었을수도 있음
+                        self.fetch()
+                        self.commentTextField.text = ""
+                        self.showToast(message: "댓글을 저장했습니다.", font: .systemFont(ofSize: 17), width: 180, height: 40)
+                        self.tableView.reloadData()
+                    })
+                }
             }
-        }
         }
     }
     
@@ -227,14 +230,11 @@ extension DetailPostViewController : UITableViewDelegate,UITableViewDataSource{
         } else {
             
             cell.menuButtonAction = { [unowned self] in
-                self.showAlert(commentNum: path.id )
-                print(path.id)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.tableView.reloadData()
-                }
+                self.showAlert(commentNum: path.id,postNum: String(path.post.id),text: path.comment)
+                print("여기!",path.comment)
             }
         }
-
+        
         return cell
     }
     
@@ -256,12 +256,17 @@ extension DetailPostViewController : UITableViewDelegate,UITableViewDataSource{
 
 extension DetailPostViewController {
     
-    func showAlert(commentNum : Int) {
+    func showAlert(commentNum : Int,postNum : String,text : String) {
         
         let alert = UIAlertController(title: "댓글", message: nil, preferredStyle: .actionSheet)
         
         let modify = UIAlertAction(title: "수정", style: .default) { action in
             //수정화면 띄우기
+            let viewController = CommentModifyViewController()
+            viewController.viewModel.postId.value = postNum
+            viewController.viewModel.inputText.value = text
+            viewController.viewModel.commentId.value = commentNum
+            self.navigationController?.pushViewController(viewController, animated: true)
         }
         let delete = UIAlertAction(title: "삭제", style: .destructive) { action in
             //삭제
@@ -273,6 +278,7 @@ extension DetailPostViewController {
                     self.showToast(message: "삭제 완료!", font: .systemFont(ofSize: 17), width: 150, height: 40)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self.fetch()
+                        self.tableView.reloadData()
                     }
                 }
             }

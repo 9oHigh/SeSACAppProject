@@ -83,7 +83,6 @@ public class APIService {
     
     static func deleteComment(commentId: Int,token: String, completion: @escaping (CommentElement?, APIError?) -> Void) {
         let url = URL(string: "\(Endpoint.uploadComment.url)/\(commentId)")!
-        print("\(url)")
         var request = URLRequest(url: url)
         
         request.httpMethod = HttpMethod.DELETE.rawValue
@@ -92,12 +91,27 @@ public class APIService {
         
         URLSession.request(endpoint: request, completion: completion)
     }
+    
+    static func modifyComment( postId : String,commentId: Int,comment : String,token: String, completion: @escaping (CommentElement?, APIError?) -> Void) {
+        let url = URL(string: "\(Endpoint.uploadComment.url)/\(commentId)")!
+        print("\(url)")
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = HttpMethod.PUT.rawValue
+        request.httpBody = "comment=\(comment)&post=\(postId)".data(using: .utf8,allowLossyConversion: false)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer \(token)", forHTTPHeaderField: "authorization")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
+    
     static func uploadPost(token: String, text: String, completion: @escaping (PostElement?, APIError?) -> Void){
         
         let url = Endpoint.uploadPost.url
         var request = URLRequest(url: url)
         request.httpMethod = HttpMethod.POST.rawValue
         request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
+        
         request.setValue("Bearer \(token)", forHTTPHeaderField: "authorization")
         
         URLSession.request(endpoint: request, completion: completion)

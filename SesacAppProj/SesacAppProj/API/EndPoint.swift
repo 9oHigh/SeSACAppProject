@@ -23,8 +23,6 @@ enum Endpoint {
     case changePWD
     case uploadPost
     case uploadComment
-//    case updateComment
-//    case deleteComment
 }
 
 extension Endpoint {
