@@ -22,8 +22,7 @@ enum Endpoint {
     case comments
     case changePWD
     case uploadPost
-//    case deletePost
-//    case uploadComment
+    case uploadComment
 //    case updateComment
 //    case deleteComment
 }
@@ -42,6 +41,8 @@ extension Endpoint {
         case .comments:
             return .makeEndpoint("comments?post=")
         
+        case .uploadComment:
+            return .makeEndpoint("comments")
         }
     }
 }

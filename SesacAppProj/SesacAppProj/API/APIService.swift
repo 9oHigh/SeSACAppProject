@@ -69,7 +69,17 @@ public class APIService {
         
         URLSession.request(endpoint: request, completion: completion)
     }
-    
+    static func uploadComment(postId : String,comment: String,token: String, completion: @escaping (CommentElement?, APIError?) -> Void) {
+        
+        let url = Endpoint.uploadComment.url
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = HttpMethod.POST.rawValue
+        request.httpBody = "comment=\(comment)&post=\(postId)".data(using: .utf8,allowLossyConversion: false)
+        request.setValue("bearer \(token)", forHTTPHeaderField: "authorization")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
     static func uploadPost(token: String, text: String, completion: @escaping (PostElement?, APIError?) -> Void){
         
         let url = Endpoint.uploadPost.url

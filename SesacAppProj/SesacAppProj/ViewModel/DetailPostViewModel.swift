@@ -7,11 +7,13 @@
 import Foundation
 
 class DetailPostViewModel {
+    //아니! 이렇게 하는거 맞냐!
+    var comment : Observable<String> = Observable("")
     
-    
-    var comment : Observable<Comments> = Observable(Comments())
-    //이게 맞아..? 아닌거 같은데..
+    var comments : Observable<Comments> = Observable(Comments())
+
     var post : Observable<PostElement> = Observable(PostElement(id: 0, text: "", user: UserInfo(id: 0, username: "", email: "", confirmed: true, createdAt: "", updatedAt: ""), createdAt: "", updatedAt: "", comments: [Comment(id: 0, comment: "", user: 0, post: 0, createdAt: "", updatedAt: "")]))
+    
     
     var errorMessage = ""
     
@@ -47,9 +49,38 @@ class DetailPostViewModel {
                 return
             }
             
-            self.comment.value = comments
+            self.comments.value = comments
         }
     }
+    
+    func uploadComment(postId : String,comment: String,completion : @escaping () -> Void){
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
+        APIService.uploadComment(postId: postId, comment: comment, token: token) { comment, error in
+            if let error = error {
+                switch error {
+                case .failed:
+                    self.errorMessage = "데이터 로드 실패"
+                case .noData:
+                    self.errorMessage = "데이터가 없음"
+                case .invalidResponse:
+                    self.errorMessage = "잘못된 응답"
+                case .invalidData:
+                    self.errorMessage = "잘못된 데이터"
+                case .badRequest:
+                    self.errorMessage = "잘못된 요청입니다."
+                case .unAuthorized:
+                    self.errorMessage  = "만료된 계정입니다."
+                case .notFound:
+                    self.errorMessage = "찾을 수 없습니다."
+                case .timeout:
+                    self.errorMessage = "시간이 초과되었습니다."
+                }
+            }
+            self.errorMessage = ""
+            completion()
+        }
+    }
+    
     func recievePost(postId : String,completion : @escaping () -> Void){
         
         let token = UserDefaults.standard.string(forKey: "token") ?? ""
@@ -128,11 +159,11 @@ class DetailPostViewModel {
 extension DetailPostViewModel {
     
     var numberOfRowInSection: Int {
-        return comment.value.count
+        return comments.value.count
     }
     
     func cellForRowAt(at indexPath: IndexPath) -> CommentElement{
-        return comment.value[indexPath.row]
+        return comments.value[indexPath.row]
     }
 }
 

@@ -55,9 +55,6 @@ class WriteViewModel{
         let token = UserDefaults.standard.string(forKey: "token") ?? ""
         
         APIService.modifyPost(postId: postId.value, text: inputText.value, token: token) { post, error in
-            
-            print(self.postId.value)
-            print(self.inputText.value)
 
             if let error = error {
                 switch error {
