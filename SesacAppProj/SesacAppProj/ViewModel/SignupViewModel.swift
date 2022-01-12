@@ -9,6 +9,7 @@ import Foundation
 
 class SignupViewModel {
     
+    let token = UserDefaults.standard.string(forKey: "token") ?? ""
     //SignupView
     //텍스트필드, 이메일,패스워드, 패스워드 확인, 닉네임 그리고 버튼 연결
     var email : Observable<String> = Observable("")
@@ -16,6 +17,9 @@ class SignupViewModel {
     var checkPassword : Observable<String> = Observable("")
     var username : Observable<String> = Observable("")
     var enableBtn : Observable<Bool> = Observable(false)
+    
+    var current : Observable<String> = Observable("")
+    
     //API 서비스의 에러 메세지
     var errorMessage : String = ""
     
@@ -47,15 +51,44 @@ class SignupViewModel {
         //이메일 유효성 검사 실패
         else if validEmail().0 == false {
             self.errorMessage = validEmail().1
-        //패스워드/패스워드 확인 일치하지 않을 경우
+            //패스워드/패스워드 확인 일치하지 않을 경우
         } else if validPassword().0 == false {
             self.errorMessage = validPassword().1
-        //두가지 모두 잘못적었을 경우
+            //두가지 모두 잘못적었을 경우
         } else {
             self.errorMessage = "이메일, 비밀번호를 확인하세요."
         }
         completion() // 로그인 성공 및 실패 보두를 확인하기 위해 바깥에
     }
+    
+    func changePassword(completion: @escaping () -> Void){
+        if validPassword().0 {
+            APIService.passwordChange(token: token, current: current.value, new: password.value, oneMore: checkPassword.value) { user, error in
+                if let error = error {
+                    switch error {
+                    case .failed:
+                        self.errorMessage = "변경실패"
+                    case .noData:
+                        self.errorMessage = "데이터를 가지고 올 수 없음"
+                    case .invalidResponse:
+                        self.errorMessage = "잘못된 응답"
+                    case .invalidData:
+                        self.errorMessage = "유효하지 않은 값"
+                    case .badRequest:
+                        self.errorMessage = "잘못된 요청"
+                    case .timeout:
+                        self.errorMessage = "시간초과"
+                    default :
+                        self.errorMessage = "만료된 계정"
+                    }
+                }
+                self.errorMessage = ""
+            }
+        }
+        completion()
+    }
+    
+    
     //이메일 유효성 검사
     func validEmail() -> (Bool,String) {
         
@@ -84,6 +117,14 @@ class SignupViewModel {
     func checkFullText() -> Bool {
         
         if email.value.count > 0 && username.value.count > 0 && password.value.count > 0 && checkPassword.value.count > 0{
+            return true
+        } else {
+            return false
+        }
+    }
+    func checkFullTextByChange() -> Bool {
+        
+        if current.value.count > 0 && password.value.count > 0 && checkPassword.value.count > 0 {
             return true
         } else {
             return false

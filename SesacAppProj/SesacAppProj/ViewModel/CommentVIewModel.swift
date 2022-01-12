@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CommentViewModel{
+class CommentViewModel : BaseViewModel{
     
     let token = UserDefaults.standard.string(forKey: "token") ?? ""
     
@@ -37,6 +37,9 @@ class CommentViewModel{
                     self.errorMessage = "잘못된 요청입니다."
                 case .unAuthorized:
                     self.errorMessage  = "만료된 계정입니다."
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.unauthorizedToStart()
+                    }
                 case .notFound:
                     self.errorMessage = "찾을 수 없습니다."
                 case .timeout:
@@ -50,6 +53,9 @@ class CommentViewModel{
             self.commentElem.value = comment
         }
         completion()
+    }
+    override func unauthorizedToStart() {
+        super.unauthorizedToStart()
     }
 }
 

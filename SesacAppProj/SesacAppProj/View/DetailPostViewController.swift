@@ -228,7 +228,7 @@ extension DetailPostViewController : UITableViewDelegate,UITableViewDataSource{
         if path.user.id != UserDefaults.standard.object(forKey: "id") as? Int{
             cell.menuButton.isHidden = true
         } else {
-            
+            cell.menuButton.isHidden = false
             cell.menuButtonAction = { [unowned self] in
                 self.showAlert(commentNum: path.id,postNum: String(path.post.id),text: path.comment)
                 print("여기!",path.comment)

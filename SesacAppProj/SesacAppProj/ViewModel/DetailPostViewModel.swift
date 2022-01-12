@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class DetailPostViewModel {
+class DetailPostViewModel : BaseViewModel {
     
     let token = UserDefaults.standard.string(forKey: "token") ?? ""
     
@@ -40,6 +40,9 @@ class DetailPostViewModel {
                     self.errorMessage = "잘못된 요청입니다."
                 case .unAuthorized:
                     self.errorMessage  = "만료된 계정입니다."
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.unauthorizedToStart()
+                    }
                 case .notFound:
                     self.errorMessage = "찾을 수 없습니다."
                 case .timeout:
@@ -73,6 +76,9 @@ class DetailPostViewModel {
                     self.errorMessage = "잘못된 요청입니다."
                 case .unAuthorized:
                     self.errorMessage  = "만료된 계정입니다."
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.unauthorizedToStart()
+                    }
                 case .notFound:
                     self.errorMessage = "찾을 수 없습니다."
                 case .timeout:
@@ -99,6 +105,9 @@ class DetailPostViewModel {
                     self.errorMessage = "잘못된 요청입니다."
                 case .unAuthorized:
                     self.errorMessage  = "만료된 계정입니다."
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.unauthorizedToStart()
+                    }
                 case .notFound:
                     self.errorMessage = "찾을 수 없습니다."
                 case .timeout:
@@ -133,6 +142,9 @@ class DetailPostViewModel {
                     self.errorMessage = "잘못된 요청입니다."
                 case .unAuthorized:
                     self.errorMessage  = "만료된 계정입니다."
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.unauthorizedToStart()
+                    }
                 case .notFound:
                     self.errorMessage = "찾을 수 없습니다."
                 case .timeout:
@@ -170,6 +182,9 @@ class DetailPostViewModel {
                     self.errorMessage = "잘못된 요청입니다."
                 case .unAuthorized:
                     self.errorMessage  = "만료된 계정입니다."
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.unauthorizedToStart()
+                    }
                 case .notFound:
                     self.errorMessage = "찾을 수 없습니다."
                 case .timeout:
@@ -186,6 +201,9 @@ class DetailPostViewModel {
             self.post.value = post
         }
         completion()
+    }
+    override func unauthorizedToStart() {
+        super.unauthorizedToStart()
     }
 }
 //뷰모델에서 바로 테이블에 사용할 수 있게

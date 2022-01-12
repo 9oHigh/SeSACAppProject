@@ -39,6 +39,16 @@ public class APIService {
         
         URLSession.request(endpoint: request, completion: completion)
     }
+    static func passwordChange(token: String,current: String, new: String,oneMore : String, completion: @escaping (User?, APIError?) -> Void) {
+        
+        let url = Endpoint.changePWD.url
+        var request = URLRequest(url: url)
+        request.httpMethod = HttpMethod.POST.rawValue
+        request.httpBody = "currentPassword=\(current)&newPassword=\(new)&confirmNewPassword=\(new)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue("bearer \(token)", forHTTPHeaderField: "authorization")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
     //포스트 하나 - 셀클릭시
     static func getPost(postId : String,token: String, completion: @escaping (PostElement?, APIError?) -> Void) {
         

@@ -37,6 +37,8 @@
 		4C86E129278C30B700963717 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E128278C30B700963717 /* WriteViewModel.swift */; };
 		4C86E12F278DA69E00963717 /* CommentModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E12E278DA69D00963717 /* CommentModifyViewController.swift */; };
 		4C86E131278DA74800963717 /* CommentVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E130278DA74800963717 /* CommentVIewModel.swift */; };
+		4C86E133278DBB7400963717 /* PasswordChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E132278DBB7400963717 /* PasswordChangeViewController.swift */; };
+		4C86E13A278EC7E900963717 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E139278EC7E900963717 /* BaseViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		4C86E128278C30B700963717 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
 		4C86E12E278DA69D00963717 /* CommentModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModifyViewController.swift; sourceTree = "<group>"; };
 		4C86E130278DA74800963717 /* CommentVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentVIewModel.swift; sourceTree = "<group>"; };
+		4C86E132278DBB7400963717 /* PasswordChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeViewController.swift; sourceTree = "<group>"; };
+		4C86E139278EC7E900963717 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 				4C86E0F42786E4B800963717 /* DetailPostTableViewCell.swift */,
 				4C86E0F02786E41B00963717 /* DetailPostViewController.swift */,
 				4C86E12E278DA69D00963717 /* CommentModifyViewController.swift */,
+				4C86E132278DBB7400963717 /* PasswordChangeViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 		4C86E09D27834E7000963717 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4C86E139278EC7E900963717 /* BaseViewModel.swift */,
 				4C86E0DB2785B96800963717 /* SignupViewModel.swift */,
 				4C86E0E42785FA6700963717 /* SigninViewModel.swift */,
 				4C86E0E82786107600963717 /* MainViewModel.swift */,
@@ -248,6 +254,7 @@
 				4C86E0A7278437F100963717 /* StartViewController.swift in Sources */,
 				4C86E0EF2786E3C600963717 /* WriteViewController.swift in Sources */,
 				4C86E08A27834DEE00963717 /* MainViewController.swift in Sources */,
+				4C86E133278DBB7400963717 /* PasswordChangeViewController.swift in Sources */,
 				4C86E12F278DA69E00963717 /* CommentModifyViewController.swift in Sources */,
 				4C86E08627834DEE00963717 /* AppDelegate.swift in Sources */,
 				4C86E0B927845A8900963717 /* SignUpViewController.swift in Sources */,
@@ -261,6 +268,7 @@
 				4C86E0DC2785B96800963717 /* SignupViewModel.swift in Sources */,
 				4C86E0C12784762C00963717 /* UIViewController + Extension.swift in Sources */,
 				4C86E0F72786E96A00963717 /* PostTopView.swift in Sources */,
+				4C86E13A278EC7E900963717 /* BaseViewModel.swift in Sources */,
 				4C86E08827834DEE00963717 /* SceneDelegate.swift in Sources */,
 				4C86E0E52785FA6700963717 /* SigninViewModel.swift in Sources */,
 				4C86E131278DA74800963717 /* CommentVIewModel.swift in Sources */,

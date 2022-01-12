@@ -7,7 +7,9 @@
 
 import Foundation
 
-class WriteViewModel{
+class WriteViewModel : BaseViewModel{
+    
+    let token = UserDefaults.standard.string(forKey: "token") ?? ""
     
     var addPost : Observable<PostElement> = Observable(PostElement(id: 0, text: "", user: UserInfo(id: 0, username: "", email: "", confirmed: true, createdAt: "", updatedAt: ""), createdAt: "", updatedAt: "", comments: [Comment(id: 0, comment: "", user: 0, post: 0, createdAt: "", updatedAt: "")]))
     
@@ -18,7 +20,6 @@ class WriteViewModel{
     
     func uploadPost(completion : @escaping () -> Void){
         
-        let token = UserDefaults.standard.string(forKey: "token") ?? ""
         APIService.uploadPost(token: token, text: inputText.value) { post, error in
             
             if let error = error {
@@ -35,6 +36,9 @@ class WriteViewModel{
                     self.errorMessage = "잘못된 요청입니다."
                 case .unAuthorized:
                     self.errorMessage  = "만료된 계정입니다."
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.unauthorizedToStart()
+                    }
                 case .notFound:
                     self.errorMessage = "찾을 수 없습니다."
                 case .timeout:
@@ -52,8 +56,6 @@ class WriteViewModel{
     }
     func modifyPost(completion : @escaping () -> Void) {
         
-        let token = UserDefaults.standard.string(forKey: "token") ?? ""
-        
         APIService.modifyPost(postId: postId.value, text: inputText.value, token: token) { post, error in
 
             if let error = error {
@@ -70,6 +72,9 @@ class WriteViewModel{
                     self.errorMessage = "잘못된 요청입니다."
                 case .unAuthorized:
                     self.errorMessage  = "만료된 계정입니다."
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.unauthorizedToStart()
+                    }
                 case .notFound:
                     self.errorMessage = "찾을 수 없습니다."
                 case .timeout:
@@ -84,6 +89,9 @@ class WriteViewModel{
             self.addPost.value = post
         }
         completion()
+    }
+    override func unauthorizedToStart() {
+        super.unauthorizedToStart()
     }
 }
 

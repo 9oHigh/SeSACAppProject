@@ -11,6 +11,7 @@ class MainViewController: BaseViewController {
     
     var tableView = UITableView()
     var plusBtn = UIButton()
+    let refreshControl = UIRefreshControl()
     
     var viewModel = MainViewModel()
     
@@ -25,33 +26,29 @@ class MainViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        viewModel.receivePosts{
-            if self.viewModel.errorMessage != ""{
-                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
-            }
-        }
-        
+        //fetchdata
+        fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.receivePosts {
-            if self.viewModel.errorMessage != ""{
-                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
-            }
-        }
+        fetch()
     }
     
     override func setConfigures() {
         
         //Main + 왼쪽 타이틀
         view.backgroundColor = .white
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "비밀번호 변경", style: .plain, target: self, action: #selector(passwordChangeBtnClicked))
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
         let titleLabel = UILabel()
         titleLabel.text = "새싹농장🌱"
         titleLabel.font = .boldSystemFont(ofSize: 18)
         titleLabel.textColor = .black
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: titleLabel)
+        
+        //refreshControl
+        initRefresh()
         
         //TableView
         tableView.delegate = self
@@ -105,6 +102,7 @@ class MainViewController: BaseViewController {
     }
 
     @objc func plusBtnClicked(){
+        
         let viewController = WriteViewController()
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
@@ -112,9 +110,42 @@ class MainViewController: BaseViewController {
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    @objc func passwordChangeBtnClicked(){
+        let viewController = PasswordChangeViewController()
+        let backBarButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        self.navigationItem.backBarButtonItem = backBarButton
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func updateUI(refresh: UIRefreshControl){
+        refresh.endRefreshing()
+        fetch()
+        self.tableView.reloadData()
+    }
+    
+    func initRefresh(){
+        
+        let refresh = UIRefreshControl()
+        
+        refresh.addTarget(self, action: #selector(updateUI(refresh:)), for: .valueChanged)
+        refresh.attributedTitle = NSAttributedString(string: "새로고침")
+        tableView.refreshControl = refresh
+    }
+    
+    func fetch(){
+        viewModel.receivePosts{
+            if self.viewModel.errorMessage != ""{
+                self.showToast(message: self.viewModel.errorMessage, font: .systemFont(ofSize: 15), width: 200, height: 40)
+            } 
+        }
+    }
 }
 
 extension MainViewController : UITableViewDelegate,UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return viewModel.numberOfRowInSection
